@@ -39,7 +39,7 @@ angular.module('cgOwf').factory('owf',['$q',function($q){
     var bootstrapper = document.querySelectorAll('[owf-app]');
     if (bootstrapper.length > 0){
         if (!OWF){
-            throw new Error('Angular-owf found an owf-app directive but OWF global is not found.');
+            throw new Error('Angular-owf found an owf-app directive but OWF global was not found.');
         }
         OWF.ready(function(){
             var moduleName = bootstrapper[0].getAttribute('owf-app');

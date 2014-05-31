@@ -12,5 +12,35 @@
   * `OWF.getOpenedWidgets()`
   * `OWF.Launcher.launch(...)`  
 
+## Getting Started
+
+Install with Bower or download the the files directly from the repo.
+
+```bash
+bower install angular-owf --save
+```
+
+Add `angular-owf.js` to your index.html. This library also depends on the [OWF Bower package](https://github.com/cgross/owf-bower) and you'll need to add its `owf-widget-min.js` from it or from OWF directly.
+
+Add `cgOwf` as a module dependency for your module.
+
+```js
+angular.module('your_app', ['cgOwf']);
+```
+
+Then inject and use the `owf` service.
+
+```js
+function myController($scope,owf){  // <-- Inject owf
+
+    owf.Launcher.launch({
+        universalName: 'widget.company.com'
+    }).then(function(){
+        console.log('Widget launched!');
+    });
+
+}
+```
+
 ## Release History
  * 5/31/2014 - v0.1.0 - Initial release
