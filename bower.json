@@ -1,0 +1,27 @@
+{
+  "name": "angular-owf",
+  "version": "0.1.0",
+  "homepage": "https://github.com/cgross/angular-owf",
+  "authors": [
+    "Chris Gross <schtoo@schtoo.com>"
+  ],
+  "description": "Angular service wrapper for the Ozone Widget Framework widget library",
+  "main": "angular-owf.js",
+  "keywords": [
+    "angular",
+    "owf",
+    "Ozone"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "owf": "~7.0.1",
+    "angular": "~1.2.16"
+  }
+}
