@@ -10,7 +10,8 @@
 
  * Modifies various asynchronous OWF methods so they now return $q promises. If the original callback would have been called with one argument, the promise will be resolved to that value.  If the callback would have been called with multiple arguments, the promise will be resolved with an array of those argument values. Currently the only promise-ified methods are:
   * `OWF.getOpenedWidgets()`
-  * `OWF.Launcher.launch(...)`  
+  * `OWF.Launcher.launch(...)`
+  * `OWF.RPC.getWidgetProxy(...)`
 
 ## Getting Started
 
@@ -42,5 +43,10 @@ function myController($scope,owf){  // <-- Inject owf
 }
 ```
 
+## Running Outside of OWF
+
+When running outside of an OWF contained widget, this service will instead contain various noop versions of the standard OWF methods.  The noop-ed methods include `OWF.ready()`, `OWF.getOpenedWidgets()`, `OWF.Launcher.launch()`, `OWF.Launcher.getLaunchData()`, and `OWF.RPC.registerFunctions()`.  
+
 ## Release History
+ * 6/17/2014 - v0.2.0 - Added getWidgetProxy to the promise-ified methods.  Added noop methods when outside of OWF.
  * 5/31/2014 - v0.1.0 - Initial release

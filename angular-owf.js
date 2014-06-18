@@ -29,10 +29,23 @@ angular.module('cgOwf').factory('owf',['$q',function($q){
       };
     };
 
-    wrapWithPromiseFn(OWF,'getOpenedWidgets',0);
-    wrapWithPromiseFn(OWF.Launcher,'launch',1);
+    if (OWF.Util.isRunningInOWF()){
+        wrapWithPromiseFn(OWF,'getOpenedWidgets',0);
+        wrapWithPromiseFn(OWF.Launcher,'launch',1);
+        wrapWithPromiseFn(OWF.RPC,'getWidgetProxy',1);
 
-    return OWF;
+        return OWF;
+    } else {
+        return {
+            getOpenedWidgets: function(){},
+            ready: function(){},
+            Launcher: { 
+                launch: function(){},
+                getLaunchData: function(){}
+            },
+            RPC: { registerFunctions: function(){} }
+        };
+    }
 }]);
 
 (function(){
