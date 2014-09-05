@@ -45,8 +45,12 @@ function myController($scope,owf){  // <-- Inject owf
 
 ## Running Outside of OWF
 
-When running outside of an OWF contained widget, this service will instead contain various noop versions of the standard OWF methods.  The noop-ed methods include `OWF.ready()`, `OWF.getOpenedWidgets()`, `OWF.Launcher.launch()`, `OWF.Launcher.getLaunchData()`, and `OWF.RPC.registerFunctions()`.  
+When running outside of an OWF contained widget, this service will instead contain various noop versions of the standard OWF methods.  The noop-ed methods include `OWF.ready()`, `OWF.getOpenedWidgets()`, `OWF.Launcher.launch()`, `OWF.Launcher.getLaunchData()`, `OWF.RPC.registerFunctions()`, `OWF.Eventing.publish()`, `OWF.Eventing.subscribe()`, and `OWF.Eventing.unsubscribe()`.  
 
 ## Release History
+ * 9/5/2012 - v0.2.1
+    * Ensure OWF contains a Util property to determine if we're running an OWF widget (instead of running inside the OWF frame itself).
+    * Added methods from OWF.Eventing to the noops when running outside of OWF.
+    * Changed bootstraping code when using `owf-app` so that the app will be automatically bootstrapped/launched when not running inside OWF.
  * 6/17/2014 - v0.2.0 - Added getWidgetProxy to the promise-ified methods.  Added noop methods when outside of OWF.
  * 5/31/2014 - v0.1.0 - Initial release
