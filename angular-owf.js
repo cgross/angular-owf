@@ -29,7 +29,7 @@ angular.module('cgOwf').factory('owf',['$q',function($q){
       };
     };
 
-    if (OWF.Util.isRunningInOWF()){
+    if (OWF.Util && OWF.Util.isRunningInOWF()){
         wrapWithPromiseFn(OWF,'getOpenedWidgets',0);
         wrapWithPromiseFn(OWF.Launcher,'launch',1);
         wrapWithPromiseFn(OWF.RPC,'getWidgetProxy',1);
@@ -39,9 +39,14 @@ angular.module('cgOwf').factory('owf',['$q',function($q){
         return {
             getOpenedWidgets: function(){},
             ready: function(){},
-            Launcher: { 
+            Launcher: {
                 launch: function(){},
                 getLaunchData: function(){}
+            },
+            Eventing: {
+                publish:function(){},
+                subscribe:function(){},
+                unsubscribe:function(){},
             },
             RPC: { registerFunctions: function(){} }
         };
@@ -49,14 +54,23 @@ angular.module('cgOwf').factory('owf',['$q',function($q){
 }]);
 
 (function(){
+
     var bootstrapper = document.querySelectorAll('[owf-app]');
     if (bootstrapper.length > 0){
         if (!OWF){
             throw new Error('Angular-owf found an owf-app directive but OWF global was not found.');
         }
-        OWF.ready(function(){
-            var moduleName = bootstrapper[0].getAttribute('owf-app');
-            angular.bootstrap(bootstrapper[0], moduleName ? [moduleName] : []);
-        });
+        if (!OWF.Util.isRunningInOWF()){
+            console.warn('[angular-owf]','Not running in OWF container. Bootstraping angular app now and proceeding with noop mocks.');
+            angular.element(document).ready(function(){
+                var moduleName = bootstrapper[0].getAttribute('owf-app');
+                angular.bootstrap(bootstrapper[0], moduleName ? [moduleName] : []);
+            });
+        } else {
+            OWF.ready(function(){
+                var moduleName = bootstrapper[0].getAttribute('owf-app');
+                angular.bootstrap(bootstrapper[0], moduleName ? [moduleName] : []);
+            });
+        }
     }
 })();
